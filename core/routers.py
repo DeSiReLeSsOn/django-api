@@ -1,6 +1,7 @@
 from rest_framework import routers
 from core.user.viewsets import UserViewSet
-from core.auth.viewsets.register import RegisterViewSet, LoginViewSet
+from core.auth.viewsets.register import RegisterViewSet
+from core.auth.viewsets.login import LoginViewSet
 
 
 
