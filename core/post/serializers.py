@@ -7,8 +7,7 @@ from core.user.serializers import UserSerializer
 
 
 class PostSerializer(AbstractSerializer):
-    author = serializers.SlugRelatedField(
-    queryset=User.objects.all(), slug_field='public_id')
+    author = serializers.SlugRelatedField( queryset=User.objects.all(), slug_field='public_id')
 
 
     def validate_author(self, value):
@@ -28,7 +27,7 @@ class PostSerializer(AbstractSerializer):
 
     class Meta:
         model = Post
-    # List of all the fields that can be included in a
-    # request or a response
-    fields = ['id', 'author', 'body', 'edited', 'created', 'updated']
-    read_only_fields = ["edited"]
+        # List of all the fields that can be included in a
+        # request or a response
+        fields = ['id', 'author', 'body', 'edited', 'created', 'updated']
+        read_only_fields = ["edited"]
