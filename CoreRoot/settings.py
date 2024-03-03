@@ -136,6 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'core_user.User'
+#SILENCED_SYSTEM_CHECKS = ['fields.E300', 'fields.E307']
 
 
 REST_FRAMEWORK = {
