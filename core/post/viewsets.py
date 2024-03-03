@@ -3,7 +3,8 @@ from core.abstract.viewsets import AbstractViewSet
 from core.post.models import Post
 from core.post.serializers import PostSerializer 
 from rest_framework.response import Response
-from rest_framework import status, action
+from rest_framework import status
+from rest_framework.decorators import action
 
 
 class PostViewSet(AbstractViewSet):
