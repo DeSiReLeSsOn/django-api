@@ -1,3 +1,12 @@
-from django.test import TestCase
+import pytest
+from core.user.models import User
 
-# Create your tests here.
+
+data_user = {
+    "username": "test_user",
+    "email": "test1@gmail.com",
+    "first_name": "Test",
+    "last_name": "User", 
+    "password": "test_password"
+
+}
