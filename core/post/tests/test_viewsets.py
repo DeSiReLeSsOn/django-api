@@ -14,6 +14,15 @@ class TestPostViewSet:
         assert response.data["count"] == 1
 
 
+    def test_retrieve(self, client, user, post):
+        client.force_authenticate(user=user)
+        response = client.get(self.endpoint + str(post.public_id) + "/")
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data['id'] == post.public_id.hex 
+        assert response.data['body'] == post.body
+        assert response.data['author']['id'] == post.author.public_id.hex
+
+
 
     def test_create(self, client, user):
         client.force_authenticate(user=user)
