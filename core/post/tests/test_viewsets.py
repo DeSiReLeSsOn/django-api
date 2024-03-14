@@ -47,3 +47,9 @@ class TestPostViewSet:
         assert response.data['body'] == data['body']
 
 
+    def test_delete(self, client, user, post):
+        client.force_authenticate(user=user)
+        response = client.delete(self.endpoint + str(post.public_id) + "/")
+        assert response.status_code == status.HTTP_204_NO_CONTENT
+
+
