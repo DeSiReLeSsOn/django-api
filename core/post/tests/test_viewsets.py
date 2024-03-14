@@ -36,3 +36,14 @@ class TestPostViewSet:
         assert response.data['author']['id'] == user.public_id.hex
 
 
+    def test_update(self, client, user, post):
+        client.force_authenticate(user=user)
+        data = {
+            "body": "Test Post Body",
+            "author": user.public_id.hex
+        }
+        response = client.put(self.endpoint + str(post.public_id) + "/", data)
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data['body'] == data['body']
+
+

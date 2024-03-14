@@ -53,8 +53,7 @@ class UserManager(BaseUserManager, AbstractManager):
 
 
 class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(db_index=True,
-    max_length=255, unique=True)
+    username = models.CharField(db_index=True, max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.EmailField(db_index=True, unique=True)
@@ -66,7 +65,7 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
     
     USERNAME_FIELD = 'email'
     
-    REQUIRED_FIELDS = ['username']
+    EMAIL_FIELD = 'email'
     
     objects = UserManager()
     
