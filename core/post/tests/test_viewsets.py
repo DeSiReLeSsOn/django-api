@@ -8,7 +8,7 @@ class TestPostViewSet:
 
 
     def test_list(self, client, user, post):
-        client.force_authentication(user=user)
+        client.force_authenticate(user=user)
         response = client.get(self.endpoint)
         assert response.status_code == status.HTTP_200_OK
         assert response.data["count"] == 1
@@ -31,6 +31,8 @@ class TestPostViewSet:
             "author": user.public_id.hex
         }
         response = client.post(self.endpoint, data)
-        assert response.status_code == status.HTTP_200_OK
+        assert response.status_code == status.HTTP_201_CREATED
         assert response.data['body'] == data['body']
         assert response.data['author']['id'] == user.public_id.hex
+
+
