@@ -52,6 +52,12 @@ class TestPostViewSet:
         response = client.delete(self.endpoint + str(post.public_id) + "/")
         assert response.status_code == status.HTTP_204_NO_CONTENT
 
+    def test_list_anonymous(self, client, post):
+        response = client.get(self.endpoint)
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data['count'] == 1
+        
+
 
     def test_create_anonymous(self, client):
         data = {
