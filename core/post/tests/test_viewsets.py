@@ -53,3 +53,10 @@ class TestPostViewSet:
         assert response.status_code == status.HTTP_204_NO_CONTENT
 
 
+    def test_create_anonymous(self, client):
+        data = {
+            "body": "Test Post Body",
+            "author": "test_user"
+        }
+
+
