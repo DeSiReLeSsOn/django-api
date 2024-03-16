@@ -23,15 +23,31 @@ class TestCommentViewSet:
         assert response.data['body'] == comment.body 
         assert response.data['author']['id'] == comment.author.public_id.hex
 
-    def test_create(self, client, post, user):
+    def test_create(self, client, user, post):
         client.force_authenticate(user=user)
         data = {
             "body": "Test Comment Body",
             "author": user.public_id.hex,
             "post": post.public_id.hex
         }
-        response = client.get(self.endpoint + str(post.public_id) + "/comment/", data)
+        response = client.post(self.endpoint + str(post.public_id) + "/comment/", data)
         assert response.status_code == status.HTTP_201_CREATED
         assert response.data['body'] == data['body']
         assert response.data['author']['id'] == user.public_id.hex 
-        
+
+
+    def test_update(self, client, post, user, comment):
+        client.force_authenticate(user=user)
+        data = {
+            "body": "Test Comment Body Updated",
+            "author": user.public_id.hex,
+            "post": post.public_id.hex
+        }
+        response = client.put(self.endpoint + str(post.public_id) + "/comment/" + str(comment.public_id) + "/", data)
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data['body'] == data['body']
+
+    def test_delete(self, client, post, user, comment):
+        client.force_authenticate(user=user)
+        response = client.delete(self.endpoint + str(post.public_id) + "/comment/" + str(comment.public_id) + "/")
+        assert response.status_code == status.HTTP_204_NO_CONTENT
