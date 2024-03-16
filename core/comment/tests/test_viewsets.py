@@ -22,3 +22,16 @@ class TestCommentViewSet:
         assert response.data['id'] == comment.public_id.hex
         assert response.data['body'] == comment.body 
         assert response.data['author']['id'] == comment.author.public_id.hex
+
+    def test_create(self, client, post, user):
+        client.force_authenticate(user=user)
+        data = {
+            "body": "Test Comment Body",
+            "author": user.public_id.hex,
+            "post": post.public_id.hex
+        }
+        response = client.get(self.endpoint + str(post.public_id) + "/comment/", data)
+        assert response.status_code == status.HTTP_201_CREATED
+        assert response.data['body'] == data['body']
+        assert response.data['author']['id'] == user.public_id.hex 
+        
