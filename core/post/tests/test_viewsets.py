@@ -66,7 +66,7 @@ class TestPostViewSet:
         assert response.data['id'] == post.public_id.hex
         assert response.data['body'] == post.body
         assert response.data['author']['id'] == post.author.public_id.hex
-        
+
     def test_create_anonymous(self, client):
         data = {
             "body": "Test Post Body",
