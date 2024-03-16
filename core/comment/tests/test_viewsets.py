@@ -13,3 +13,12 @@ class TestCommentViewSet:
         response = client.get(self.endpoint + str(post.public_id) + "/comment/")
         assert response.status_code == status.HTTP_200_OK
         assert response.data['count'] == 1 
+
+
+    def test_retrieve(self, client, post, user, comment):
+        client.force_authenticate(user=user)
+        response = client.get(self.endpoint + str(post.public_id) + "/comment/" + str(comment.public_id) + "/")
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data['id'] == comment.public_id.hex
+        assert response.data['body'] == comment.body 
+        assert response.data['author']['id'] == comment.author.public_id.hex
