@@ -51,3 +51,14 @@ class TestCommentViewSet:
         client.force_authenticate(user=user)
         response = client.delete(self.endpoint + str(post.public_id) + "/comment/" + str(comment.public_id) + "/")
         assert response.status_code == status.HTTP_204_NO_CONTENT
+
+
+    def test_list_anonymous(self, client, post, comment):
+        response = client.get(self.endpoint + str(post.public_id) + "/comment/")
+        assert response.status_code == status.HTTP_200_OK 
+        assert response.data['count'] == 1 
+
+    def test_create_anonymous(self, client, post):
+        data = {} 
+        response = client.post(self.endpoint + str(post.public_id) + "/comment/", data)
+        assert response.statsu_code == status.HTTP_401_UNAUTHORIZED 
