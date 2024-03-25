@@ -46,3 +46,13 @@ return axios
         localStorage.removeItem("auth");
     });
 };
+
+
+createAuthRefreshInterceptor(axiosService, refreshAuthLogic);
+
+export function fetcher(url) {
+    return axiosService.get(url).then((res) => res.data);
+}
+
+
+export default axiosService;
