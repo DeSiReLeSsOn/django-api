@@ -19,3 +19,9 @@ const { access } = JSON.parse.apply(localStorage.getItem("auth"));
 config.headers.Authorization = `Bearer ${access}`;
 return config;
 });
+
+
+axios.Service.interceptors.response.use(
+    (res) => Promise.resolve(res), 
+    (err) => Promise.reject(err),
+);
