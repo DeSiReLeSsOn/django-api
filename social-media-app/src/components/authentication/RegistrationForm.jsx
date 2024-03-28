@@ -30,4 +30,22 @@ const handleSubmit = (event) => {
         last_name: form.last_name,
         bio: form.bio,
     };
-}
+
+    axios
+        .post("http://localhost:8000/api/auth/register/", data)
+        .then((res) => {
+            // Registering the account and tokens the store
+            localStorage.setItem("auth", JSON.stringify({
+                access: res.data.access,
+                refresh: res.data.refresh, 
+                user: res.data.user,
+            }));
+
+            navigate("/");
+        })
+        .catch((err) => {
+            if (err.message) {
+                setError(err.request.response);
+            }
+        });
+};
