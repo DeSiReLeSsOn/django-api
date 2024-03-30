@@ -48,4 +48,27 @@ const handleSubmit = (event) => {
                 setError(err.request.response);
             }
         });
-};
+
+        return (
+            <Form
+              id="registration-form"
+              className="border p-4 rounded"
+              noValidate
+              validated={validated}
+              onSubmit={handleSubmit}
+            >
+              <Form.Group className="mb-3">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  value={form.first_name}
+                  onChange={(e) => setForm({ ...form, first_name: e.target.value })}
+                  required
+                  type="text"
+                  placeholder="Enter first name"
+                />
+                <Form.Control.Feedback type="invalid">
+                  This file is required.
+                </Form.Control.Feedback>
+              </Form.Group>
+    ) ;  
+}
