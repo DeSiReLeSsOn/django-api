@@ -6,7 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function BavigationBar() {
+function NavigationBar() {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem("auth");
+        navigate("/login/");
+    };
     return (
         <Navbar bg="primary" variant="dark">
             <Container>
@@ -30,3 +35,5 @@ function BavigationBar() {
         </Navbar>
     );
 }
+
+export default Navigationbar;
