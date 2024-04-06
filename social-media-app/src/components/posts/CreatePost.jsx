@@ -20,6 +20,28 @@ function CreatePost() {
 
 
             {/* Add modal code here*/}
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton className="border-0">
+                    <Modal.Title>Create Post</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="border-0">
+                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                        <Form.Group className="mb-5">
+                            <Form.Control name="body" value={form.body} onChange={ (e) => setForm({ ...form,
+                              body: e.target.value })}
+                              as="textarea"
+                              rows={3}
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleSubmit} disabled={form.body === undefined}>
+                        Post 
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }
