@@ -8,6 +8,12 @@ function CreatePost() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [validated, setValidated] = useState(false);
+    const [form, setForm] = useState({});
+
+
+    const user = getUser();
+
 
 
     return (
