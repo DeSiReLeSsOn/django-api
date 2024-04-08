@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import axiosServise from "../../helpers/axios";
 import { getUser } from "../../hooks/user.actions";
+import axiosService from "../../helpers/axios";
 
 
 function CreatePost() {
@@ -13,6 +14,34 @@ function CreatePost() {
 
 
     const user = getUser();
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const createPostForm = event.currentTarget;
+
+        if (createPostForm.checkValidity() === false) {
+            event.stopPropagation();
+        }
+
+        setValidated(true);
+
+        const data = {
+            author: user.id,
+            body: form.body, 
+        };
+
+
+        axiosService
+           .post("/post/", data)
+           .then(() => {
+            handleClose();
+            setForm({});
+           })
+           .catch((error) => {
+            console.log(error);
+           });
+    };
 
 
 
