@@ -11,6 +11,7 @@ import { randomAvatar } from "../../utils";
 import axiosService from "../../helpers/axios";
 import Toaster from "../Toaster";
 import { getUser } from "../../hooks/user.actions";
+import UpdatePost from "./UpdatePost";
 
 
 const MoreToggleIcon = React.forwardRef(({ onClick }, ref) => (
@@ -87,7 +88,8 @@ function Post(props) {
                   <Dropdown.Toggle as={MoreToggleIcon}>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item>Update</Dropdown.Item>
+                    <UpdatePost post={post} 
+                      refresh={refresh} />
                     <Dropdown.Item 
                       onClick={handleDelete}
                       className="text-danger"
