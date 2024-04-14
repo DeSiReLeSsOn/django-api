@@ -6,10 +6,11 @@ import {
   LikeOutlined,
   MoreOutlined,
 } from "@ant-design/icons";
-import { Image, Card, Dropdown } from "react-bootstrap";
+import { Image, Card, Dropdown, DropdownToggle } from "react-bootstrap";
 import { randomAvatar } from "../../utils";
 import axiosService from "../../helpers/axios";
 import Toaster from "../Toaster";
+import { getUser } from "../../hooks/user.actions";
 
 
 const MoreToggleIcon = React.forwardRef(({ onClick }, ref) => (
@@ -28,6 +29,10 @@ const MoreToggleIcon = React.forwardRef(({ onClick }, ref) => (
 
 function Post(props) {
   const { post, refresh } = props;
+  const [showToast, setShowToast] = useState(false);
+
+
+  const user = getUser();
   
 
   
@@ -40,6 +45,19 @@ function Post(props) {
       })
       .catch((err) => console.error(err));
   };
+
+  const handleDelete = () => {
+    axiosService
+      .delete(`/post/${post.id}/`)
+      .then(() => {
+        setShowToast(true);
+        refresh();
+      })
+      .catch((err) => console.log(err));
+  };
+
+
+
 
 
 
@@ -63,6 +81,23 @@ function Post(props) {
                 </p>
               </div>
             </div>
+            {user.name === post.author.name && (
+              <div>
+                <Dropdown>
+                  <Dropdown.Toggle as={MoreToggleIcon}>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>Update</Dropdown.Item>
+                    <Dropdown.Item 
+                      onClick={handleDelete}
+                      className="text-danger"
+                    >
+                      Delete
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            )}
           </Card.Title>
           <Card.Text>{post.body}</Card.Text>
           <div className="d-flex flex-row">
@@ -121,6 +156,13 @@ function Post(props) {
           </div>
         </Card.Footer>
       </Card>
+      <Toaster
+        title="Post!"
+        message="Post deleted"
+        type="danger"
+        showToast={showToast}
+        onClose={() => setShowToast(false)}
+      />
     </>
   );
 }
