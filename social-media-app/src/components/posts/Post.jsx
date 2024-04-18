@@ -67,17 +67,6 @@ function Post(props) {
   return (
     <>
       <Card className="rounded-3 my-4">
-        {post.image && (
-          <Card.Img
-            variant="top"
-            src={post.image}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "/media/2024/04/18/91e6d05dd40773292292bad5a75e75db.jpeg";
-            }}
-            className="my-2"
-          />
-        )}
         <Card.Body>
           <Card.Title className="d-flex flex-row justify-content-between">
             <div className="d-flex flex-row">
@@ -101,12 +90,8 @@ function Post(props) {
                   <Dropdown.Toggle as={MoreToggleIcon}>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <UpdatePost post={post} 
-                      refresh={refresh} />
-                    <Dropdown.Item 
-                      onClick={handleDelete}
-                      className="text-danger"
-                    >
+                    <UpdatePost post={post} refresh={refresh} />
+                    <Dropdown.Item onClick={handleDelete} className="text-danger">
                       Delete
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -114,6 +99,17 @@ function Post(props) {
               </div>
             )}
           </Card.Title>
+          {post.image && (
+            <Card.Img
+              variant="top"
+              src={post.image}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/media/2024/04/18/91e6d05dd40773292292bad5a75e75db.jpeg";
+              }}
+              className="my-2"
+            />
+          )}
           <Card.Text>{post.body}</Card.Text>
           <div className="d-flex flex-row">
             <LikeFilled
@@ -132,11 +128,11 @@ function Post(props) {
               <small>{post.likes_count} like</small>
             </p>
           </div>
-          { !isSinglePost && (
+          {!isSinglePost && (
             <p className="ms-1 fs-6">
               <small>
                 <Link>
-                  {Post.comments_count} comments 
+                  {post.comments_count} comments
                 </Link>
               </small>
             </p>
@@ -164,7 +160,7 @@ function Post(props) {
               <small>Like</small>
             </p>
           </div>
-          { !isSinglePost && (
+          {!isSinglePost && (
             <div className="d-flex flex-row">
               <CommentOutlined
                 style={{
@@ -191,6 +187,6 @@ function Post(props) {
       />
     </>
   );
-}
+};
 
 export default Post;
