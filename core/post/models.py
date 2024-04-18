@@ -11,6 +11,8 @@ class Post(AbstractModel):
     author = models.ForeignKey(to="core_user.User", on_delete=models.CASCADE)
     body = models.TextField()
     edited = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='images/%Y/%m/%d',
+                              blank=True, verbose_name='image')
 
     objects = PostManager()
 

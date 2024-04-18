@@ -4,6 +4,7 @@ import axiosService from "../../helpers/axios";
 import { getUser } from "../../hooks/user.actions";
 import Toaster from "../Toaster";
 
+
 function CreatePost(props) {
   const { refresh } = props;
   const [show, setShow] = useState(false);
@@ -11,7 +12,10 @@ function CreatePost(props) {
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("");
   const [validated, setValidated] = useState(false);
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    body: "",
+    image: null,
+  });
 
   const user = getUser();
 
@@ -28,18 +32,29 @@ function CreatePost(props) {
 
     setValidated(true);
 
-    const data = {
-      author: user.id,
-      body: form.body,
-    };
+
+
+    const formData = new FormData();
+    formData.append("author", user.id);
+    formData.append("body", form.body);
+    if (form.image) {
+      formData.append("image", form.image);
+    }
+
+
+    
 
     axiosService
-      .post("/post/", data)
+      .post("/post/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then(() => {
         handleClose();
         setToastMessage("Post created 🚀");
         setToastType("success");
-        setForm({});
+        setForm({ body: "", image: null });
         setShowToast(true);
         refresh();
       })
@@ -48,6 +63,13 @@ function CreatePost(props) {
         setToastType("danger");
       });
   };
+
+
+  const handleImageChange = (e) => {
+    setForm({ ...form, image: e.target.files[0] });
+  };
+
+
 
   return (
     <>
@@ -75,13 +97,19 @@ function CreatePost(props) {
                 rows={3}
               />
             </Form.Group>
+            <Form.Group contrilId="formFile" className="mb-3">
+              <Form.Label>
+                Post Image
+              </Form.Label>
+              <Form.Control type="file" onChange={handleImageChange} />
+            </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button
             variant="primary"
             onClick={handleSubmit}
-            disabled={form.body === undefined}
+            disabled={form.body === "" && form.image === null}
           >
             Post
           </Button>
