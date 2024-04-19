@@ -13,14 +13,48 @@ function CreateComment(props) {
 
     const { toaster, setToaster } = useContext(Context);
 
+
+    const user = getUser();
+
     const handleSubmit = (event) => {
         
     };
 
 
     return (
-        <Form>
-
+        <Form
+            className="d-flex flex-row justify-content-between"
+            noValidate 
+            validated={validated}
+            onSubmit={handleSubmit}
+        >
+            <Image 
+                src={avatar}
+                roundedCircle
+                width={48}
+                height={48}
+                className="my-2"
+            />
+            <Form.Group className="m-3 w-75">
+                <Form.Control 
+                    className="py-2 rounded-pill border-primary"
+                    type="text"
+                    placeholder="Write a comment"
+                    value="body"
+                    onChange={(e) => setForm({ ...form, 
+                                                body: e.target.value })}                 
+                />
+            </Form.Group>
+            <div className="m-auto">
+                <Button
+                    variant="primary"
+                    onClick={handleSubmit}
+                    disabled={form.body === undefined}
+                    size="small"
+                >
+                    Comment
+                </Button>
+            </div>
         </Form>
     );
 }
