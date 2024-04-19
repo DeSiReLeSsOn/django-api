@@ -4,9 +4,8 @@ import { Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "../helpers/axios";
-import { Post } from "../components/posts";
-import CreateComment from "../components/comments/CreateComment";
-import Comment from "../components/comments/Comment";
+import  Post  from "../components/posts/Post";
+
 
 
 function SinglePost() {
@@ -33,3 +32,6 @@ function SinglePost() {
         </Layout>
     );
 }
+
+
+export default SinglePost;
