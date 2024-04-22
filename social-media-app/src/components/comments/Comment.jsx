@@ -4,9 +4,9 @@ import { Image, Card, Dropdown } from "react-bootstrap";
 import { randomAvatar } from "../../utils";
 import axiosService from "../../helpers/axios";
 import { getUser } from "../../hooks/user.actions";
-import UpdateComment from "./UpdateComment";
 import { Context } from "../Layout";
 import MoreToggleIcon from "../MoreToggleIcon";
+
 
 function Comment(props) {
     const { postId, comment, refresh } = props;
@@ -15,7 +15,25 @@ function Comment(props) {
     const user = getUser();
 
     const handleDelete = () => {
-        // Handle the deletion of a comment
+        axiosService
+            .delete(`/post/${postId}/comment/${comment.id}/`)
+            .then(() => {
+                setToaster({
+                    type: "danger",
+                    message: "Comment deleted 🚀",
+                    show: true,
+                    title: "Comment Deleted",
+                });
+                refresh();
+            })
+            .catch((err) => {
+                setToaster({
+                    type: "warning",
+                    message: "Comment deleted 🚀",
+                    show: true,
+                    title: "Comment Deleted",
+                });
+            });
     };
 
     return (
@@ -23,7 +41,8 @@ function Comment(props) {
             <Card.Body>
                 <Card.Title className="d-flex flex-row justify-content-between">
                     <div className="d-flex flex-row">
-                        <Image src={randomAvatar()}
+                        <Image 
+                            src={randomAvatar()}
                             roundedCircle
                             width={48}
                             height={48}
@@ -39,17 +58,16 @@ function Comment(props) {
                     {user.name === comment.author.name && (
                         <div>
                             <Dropdown>
-                                <Dropdown.Toggle
-                                    as={MoreToggleIcon}></Dropdown.Toggle>
+                                <Dropdown.Toggle as={MoreToggleIcon}></Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item>
                                         Modify 
                                     </Dropdown.Item>
+                                    <Dropdown.Item onClick={handleDelete}
+                                        className="text-danger">
+                                            Delete
+                                        </Dropdown.Item>
                                 </Dropdown.Menu>
-                                <Dropdown.Item onClick={handleDelete}
-                                    className="text-danger">
-                                        Delete
-                                    </Dropdown.Item>
                             </Dropdown>
                         </div>
                     )}
