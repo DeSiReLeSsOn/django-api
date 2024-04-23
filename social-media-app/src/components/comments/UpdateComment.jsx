@@ -25,7 +25,31 @@ function UpdateComment(props) {
             <Dropdown.Item 
                 onClick={handleShow}>Modify</Dropdown.Item>
 
-            // Addingthe Modal here
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton className="border-0">
+                    <Modal.Title>Update Post</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="border-0">
+                    <Form noValidate validated={validated}
+                        onSubmit={handleSubmit}>
+                            <Form.Group className="mb-3">
+                                <Form.Control 
+                                    name="body"
+                                    value={form.body}
+                                    onChange={(e) => setForm({ ...form,
+                                        body: e.target.value })}
+                                    as="textarea"
+                                    rows={3}
+                                />
+                            </Form.Group>
+                        </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleSubmit}>
+                        Modify
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }
