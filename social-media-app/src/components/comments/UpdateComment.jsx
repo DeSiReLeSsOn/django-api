@@ -17,7 +17,41 @@ function UpdateComment(props) {
     const { toaster, setToaster } = useContext(Context);
 
     const handleSubmit = (event) => {
-        // handle the modifacation of a comment
+        event.preventDefault();
+        const updateCommentForm = event.currentTarget;
+
+        if (updateCommentForm.checkValidity() === false) {
+            event.stopPropagation();
+        }
+
+        setValidated(true);
+
+        const data = {
+            author: form.author, 
+            body: form.body,
+            post: postId
+        };
+
+        axiosService
+            .put(`/post/${postId}/comment/${comment.id}/`, data)
+            .then(() => {
+                handleClose();
+                setToaster({
+                    type: "success",
+                    message: "Comment updated 🚀",
+                    show: true,
+                    title: "Success!",
+                });
+                refresh();
+            })
+            .catch((error) => {
+                setToaster({
+                    type: "danger",
+                    message: "An error occured.",
+                    show: true, 
+                    title: "Comment Error",
+                });
+            });
     };
 
     return (
