@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, Modal, Form, Dropdown } from "reactbootstrap";
+import { Button, Modal, Form, Dropdown } from "react-bootstrap";
 import axiosService from "../../helpers/axios";
 import { Context } from "../Layout";
 
@@ -15,6 +15,9 @@ function UpdateComment(props) {
     });
 
     const { toaster, setToaster } = useContext(Context);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleSubmit = (event) => {
         event.preventDefault();
