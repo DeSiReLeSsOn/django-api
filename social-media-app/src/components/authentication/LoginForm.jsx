@@ -43,7 +43,7 @@ function LoginForm() {
       onSubmit={handleSubmit}
     >
       <Form.Group className="mb-3">
-        <Form.Label>Email</Form.Label>
+        <Form.Label>UserName</Form.Label>
         <Form.Control
           value={form.username}
           onChange={(e) => setForm({ ...form, username: e.target.value })}
