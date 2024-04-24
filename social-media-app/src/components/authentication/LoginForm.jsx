@@ -6,7 +6,7 @@ import { useUserActions } from "../../hooks/user.actions";
 function LoginForm() {
   const [validated, setValidated] = useState(false);
   const [form, setForm] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [error, setError] = useState(null);
@@ -23,7 +23,7 @@ function LoginForm() {
     setValidated(true);
 
     const data = {
-      email: form.email,
+      username: form.username,
       password: form.password,
     };
 
@@ -46,7 +46,7 @@ function LoginForm() {
         <Form.Label>Email</Form.Label>
         <Form.Control
           value={form.username}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          onChange={(e) => setForm({ ...form, username: e.target.value })}
           required
           type="text"
           placeholder="Enter email"
