@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import SinglePost from "./pages/SinglePost";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -22,6 +23,14 @@ function App() {
         element={
           <ProtectedRoute>
             <SinglePost />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/profile/:profileId/"
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         }
       />

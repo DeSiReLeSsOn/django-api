@@ -1,7 +1,7 @@
 import React from "react";
 import { getUser, useUserActions } from "../hooks/user.actions";
 
-
+import { Link } from "react-router-dom";
 import { Navbar, Container, Image, NavDropdown, Nav } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ function Navigationbar() {
                 />
               }
             >
-              <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+              <NavDropdown.Item as={Link} onTouchEnd={`/profile/${user.id}/`}>Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
