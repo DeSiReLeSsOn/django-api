@@ -1,5 +1,6 @@
 import React from "react";
-import { randomAvatar } from "../utils";
+import { getUser, useUserActions } from "../hooks/user.actions";
+
 
 import { Navbar, Container, Image, NavDropdown, Nav } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,9 @@ function Navigationbar() {
     localStorage.removeItem("auth");
     navigate("/login/");
   };
+
+  const user = getUser();
+  const userActions = useUserActions();
 
   return (
     <Navbar bg="primary" variant="dark">
@@ -22,7 +26,7 @@ function Navigationbar() {
             <NavDropdown
               title={
                 <Image
-                  src={randomAvatar()}
+                  src={user.avatar}
                   roundedCircle
                   width={36}
                   height={36}

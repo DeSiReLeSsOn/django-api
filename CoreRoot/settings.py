@@ -165,4 +165,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 
 #Avatar 
-DEFAULT_AVATAR_URL = "https://avatars.dicebear.com/api/identicon/.svg"
+DEFAULT_AVATAR_URL = "https://sneg.top/uploads/posts/2023-06/1688043532_sneg-top-p-avatarka-fotoshop-vkontakte-9.png"
