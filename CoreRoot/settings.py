@@ -161,4 +161,8 @@ CORS_ALLOWED_ORIGINS = [
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = BASE_DIR / 'uploads'
+
+#Avatar 
+DEFAULT_AVATAR_URL = "https://avatars.dicebear.com/api/identicon/.svg"
