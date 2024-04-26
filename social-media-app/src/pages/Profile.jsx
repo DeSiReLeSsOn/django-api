@@ -7,7 +7,6 @@ import { fetcher } from "../helpers/axios";
 import Post from "../components/posts/Post";
 import { Row, Col } from "react-bootstrap";
 
-
 function Profile() {
   const { profileId } = useParams();
 

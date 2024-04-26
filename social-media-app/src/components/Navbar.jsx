@@ -33,7 +33,7 @@ function Navigationbar() {
                 />
               }
             >
-              <NavDropdown.Item as={Link} onTouchEnd={`/profile/${user.id}/`}>Profile</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={`/profile/${user.id}/`}>Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
