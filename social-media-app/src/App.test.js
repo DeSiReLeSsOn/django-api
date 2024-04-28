@@ -1,15 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
-import { BrowserRouter } from "react-router-dom";
+import { render, screen } from "./helpers/test-utils";
+import App from "./App";
 
-
-
-test('renders Welcome to Postagram text', () => {
-  render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-  const textElement = screen.getByText(/Welcome to Postagram!/i);
-  expect(textElement).toBeInTheDocument();
+test("renders Welcome to Postagram text", () => {
+  render(<App />);
+  const linkElement = screen.getByText(/Welcome to Postagram!/i);
+  expect(linkElement).toBeInTheDocument();
 });
