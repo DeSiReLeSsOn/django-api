@@ -16,7 +16,15 @@ test("rebders Login form", async () => {
     const usernameField = screen.getByTestId("username-field");
     expect(usernameField).toBeInTheDocument();
 
-    const passwordInput = screen.getByTestId("password-field");
-    expect(passwordInput).toBeInTheDocument();
+    const passwordField = screen.getByTestId("password-field");
+    expect(passwordField).toBeInTheDocument();
 
+
+    const password = faker.lorem.slug(2);
+    await user.type(usernameField, userData.username);
+    await user.type(passwordField, password);
+
+
+    expect(usernameField.value).toBe(userData.username);
+    expect(passwordField.value).toBe(password);
 });
