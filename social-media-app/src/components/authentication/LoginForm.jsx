@@ -41,11 +41,13 @@ function LoginForm() {
       noValidate
       validated={validated}
       onSubmit={handleSubmit}
+      data-testid="login-form"
     >
       <Form.Group className="mb-3">
         <Form.Label>UserName</Form.Label>
         <Form.Control
           value={form.username}
+          fdata-testid="username-field"
           onChange={(e) => setForm({ ...form, username: e.target.value })}
           required
           type="text"
